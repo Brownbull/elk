@@ -6,22 +6,24 @@
 	},
 	"item": [
 		{
-			"name": "postMovies",
+			"name": "putMoviesBulk",
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\"genre\":[\"IMAX\",\"Sci-Fi\"],\r\n\"title\":\"Interstellar\",\r\n\"year\":2014\r\n}"
+					"mode": "file",
+					"file": {
+						"src": "/D:/Reference/ELK/data/movies/movies.json"
+					}
 				},
 				"url": {
-					"raw": "127.0.0.1:9200/movies/_doc/109487-d",
+					"raw": "127.0.0.1:9200/_bulk?pretty",
 					"host": [
 						"127",
 						"0",
@@ -30,9 +32,13 @@
 					],
 					"port": "9200",
 					"path": [
-						"movies",
-						"_doc",
-						"109487-d"
+						"_bulk"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
 					]
 				}
 			},
@@ -71,7 +77,7 @@
 			"response": []
 		},
 		{
-			"name": "delMovies",
+			"name": "dropMovies",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -114,7 +120,7 @@
 			"response": []
 		},
 		{
-			"name": "getMovies",
+			"name": "getAllMovies",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -136,6 +142,137 @@
 							"key": "pretty",
 							"value": null
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postMovies",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"genre\":[\"IMAX\",\"Sci-Fi\"],\r\n\"title\":\"Interstellar\",\r\n\"year\":2014\r\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:9200/movies/_doc/109487-d",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"movies",
+						"_doc",
+						"109487-d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updtMovies",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"doc\":{\n\t\t\"title\": \"Interstellar\",\n\t\t\"genre\": [\"Fome\",\"Lenta\"]\n\t}\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:9200/movies/_doc/109487/_update",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"movies",
+						"_doc",
+						"109487",
+						"_update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMovies",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "127.0.0.1:9200/movies/_doc/109487?pretty",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"movies",
+						"_doc",
+						"109487"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delMovies",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "127.0.0.1:9200/movies/_doc/58559",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"movies",
+						"_doc",
+						"58559"
 					]
 				}
 			},

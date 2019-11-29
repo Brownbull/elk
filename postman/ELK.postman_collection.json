@@ -277,6 +277,89 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "updtConcurrentMovies",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"genres\": [\"IMAX2\", \"Sci-Fi\"],\n\t\"title\": \"Inter Stellar\",\n\t\"year\": 2019\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:9200/movies/_doc/109487?if_seq_no=8&if_primary_term=1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"movies",
+						"_doc",
+						"109487"
+					],
+					"query": [
+						{
+							"key": "if_seq_no",
+							"value": "8"
+						},
+						{
+							"key": "if_primary_term",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updtPersistentMovies",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"doc\": {\n\t\t\"title\": \"Interstaller\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:9200/movies/_doc/109487/_update?retry_on_conflict=5",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"movies",
+						"_doc",
+						"109487",
+						"_update"
+					],
+					"query": [
+						{
+							"key": "retry_on_conflict",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

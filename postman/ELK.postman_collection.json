@@ -1340,38 +1340,44 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "getAll",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "127.0.0.1:9200/ratings/_search?pretty",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "9200",
-					"path": [
-						"ratings",
-						"_search"
-					],
-					"query": [
-						{
-							"key": "pretty",
-							"value": null
+			"name": "Tags",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:9200/tags/_search?pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"tags",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
 						}
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

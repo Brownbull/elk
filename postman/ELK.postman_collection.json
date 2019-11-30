@@ -218,7 +218,7 @@
 					"response": []
 				},
 				{
-					"name": "get",
+					"name": "urlGet",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1051,6 +1051,77 @@
 								"_search"
 							],
 							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addBulk2",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/D:/Reference/ELK/scripts/movies2.json"
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/_bulk",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"_bulk"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "urlQrySimple",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:9200/movies/_search?q=mary%20poppins&pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"movies",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "mary%20poppins"
+								},
 								{
 									"key": "pretty",
 									"value": null

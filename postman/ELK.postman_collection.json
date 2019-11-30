@@ -683,6 +683,48 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "qryProximityMovies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t \"query\" : {\r\n\t\t\"match_phrase\": {\r\n\t\t\t\"title\": {\r\n\t\t\t\t\"query\": \"star beyond\",\r\n\t    \t\t\"slop\": 100\r\n\t    \t}\r\n\t    }\r\n\t}\r\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:9200/movies/_search?pretty",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"movies",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				},
+				"description": "match_phrase is a query, so results are sorted by relevance.\r\nYou can use a high slop, and will get docs with the words closer together scored higher."
+			},
+			"response": []
 		}
 	]
 }

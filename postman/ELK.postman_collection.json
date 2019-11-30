@@ -692,6 +692,47 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "qryComplxSort",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\":\n\t{\n\t\t\"bool\": {\n\t\t\t\"must\": {\n\t\t\t\t\"match\": {\n\t\t\t\t\t\"genre\": \"Sci-Fi\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"filter\": {\n\t\t\t\t\"range\": {\n\t\t\t\t\t\"year\": {\n\t\t\t\t\t\t\"lt\": 1960\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t},\n\t\"sort\": \"title.raw\"\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/movies/_search?pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"movies",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "309cba6c-ae75-4990-8a5d-025337fa28b1",
+		"_postman_id": "c52d24e3-9fa9-4a7c-93cd-b7c0fc431fb1",
 		"name": "ELK",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -901,6 +901,164 @@
 						"description": "year is date and can not be used on partial search. Mapping was remade adding txt field to year as text type field."
 					},
 					"response": []
+				},
+				{
+					"name": "addAnalyzer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"settings\":  {\n\t\t\"analysis\": {\n\t\t\t\"filter\": {\n\t\t\t\t\"autocomplete_filter\": {\n\t\t\t\t\t\"type\": \"edge_ngram\",\n\t\t\t\t\t\"min_gram\": 1,\n\t\t\t\t\t\"max_gram\": 20\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"analyzer\": {\n\t\t\t\t\"autocomplete\": {\n\t\t\t\t\t\"type\": \"custom\",\n\t\t\t\t\t\"tokenizer\": \"standard\",\n\t\t\t\t\t\"filter\": [\n\t\t\t\t\t\t\"lowercase\",\n\t\t\t\t\t\t\"autocomplete_filter\"\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/movies/?pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"movies",
+								""
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "analayzerStruct",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"analyzer\": \"autocomplete\",\n\t\"text\": \"Sta\"\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/movies/_analyze?pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"movies",
+								"_analyze"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mapUpdt",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"properties\": {\n\t\t\"title\": {\n\t\t\t\"type\": \"text\",\n\t\t\t\"analyzer\": \"autocomplete\"\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/movies/_mapping?pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"movies",
+								"_mapping"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "qryAutoComplete",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\": {\n\t\t\"match\": {\n\t\t\t\"title\": {\n\t\t\t\t\"query\": \"star tr\",\n\t\t\t\t\"analyzer\": \"standard\"\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/movies/_search?pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"movies",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -924,7 +1082,7 @@
 							"raw": "{\n\t\"mappings\": {\n\t\t\"properties\": {\n\t\t\t\"film_to_franchise\": {\n\t\t\t\t\"type\": \"join\",\n\t\t\t\t\"relations\": {\n\t\t\t\t\t\"franchise\": \"film\"\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
 						},
 						"url": {
-							"raw": "127.0.0.1:9200/series",
+							"raw": "127.0.0.1:9200/series?",
 							"host": [
 								"127",
 								"0",
@@ -1070,5 +1228,6 @@
 			],
 			"protocolProfileBehavior": {}
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }

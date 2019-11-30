@@ -9,6 +9,9 @@ This will describe operations on datasets obtained from queries or filters on El
   - [Partial Match](#partial-match)
     - [Prefix](#prefix)
     - [Wildcard](#wildcard)
+  - [Search as you type](#search-as-you-type)
+    - [query-time search-as-you-type](#query-time-search-as-you-type)
+    - [N-gram](#n-gram)
 ***
 ## Pagination
 Allows you to get 'n' results from 'm' page (starting from 0)
@@ -103,3 +106,29 @@ curl -XGET 127.0.0.1:9200/movies/_search?pretty -d
 	}
 }
 ```
+
+## Search as you type
+### query-time search-as-you-type
+```shell
+{
+	"query": {
+		"match_phrase_prefix": {
+			"title": {
+				"query": "start t",
+				"slop": 10
+			}
+		}
+	}
+}
+```
+### N-gram
+"start"
+- unigram: [s,t,a,r]
+- bigram: [st,ta,at]
+- trigram: [sta,tat]
+- 4-gram: [star]
+
+```shell
+
+```
+

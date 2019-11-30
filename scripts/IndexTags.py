@@ -26,7 +26,7 @@ def readTags():
         tag['user_id'] = int(line['userId'])
         tag['movie_id'] = int(line['movieId'])
         tag['title'] = titleLookup[line['movieId']]
-        tag['tag'] = float(line['tag'])
+        tag['tag'] = line['tag']
         tag['timestamp'] = int(line['timestamp'])
         yield tag
 

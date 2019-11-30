@@ -26,7 +26,7 @@ def readRatings():
         rating['user_id'] = int(line['userId'])
         rating['movie_id'] = int(line['movieId'])
         rating['title'] = titleLookup[line['movieId']]
-        rating['rating'] = line['rating']
+        rating['rating'] = float(line['rating'])
         rating['timestamp'] = int(line['timestamp'])
         yield rating
 

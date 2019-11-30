@@ -60,7 +60,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"mappings\": {\n\t\t\"properties\": {\n\t\t\t\"id\": {\n\t\t\t\t\"type\": \"integer\"\n\t\t\t},\n\t\t\t\"year\": {\n\t\t\t\t\"type\": \"date\"\n\t\t\t},\n\t\t\t\"genre\": {\n\t\t\t\t\"type\": \"keyword\"\n\t\t\t},\n\t\t\t\"title\": {\n\t\t\t\t\"type\": \"text\",\n\t\t\t\t\"analyzer\": \"english\"\n\t\t\t}\n\t\t}\n\t}\n}"
+							"raw": "{\n\t\"mappings\": {\n\t\t\"properties\": {\n\t\t\t\"id\": {\n\t\t\t\t\"type\": \"integer\"\n\t\t\t},\n\t\t\t\"year\": {\n\t\t\t\t\"type\": \"date\"\n\t\t\t},\n\t\t\t\"genre\": {\n\t\t\t\t\"type\": \"keyword\"\n\t\t\t},\n\t\t\t\"title\": {\n\t\t\t\t\"type\": \"text\",\n\t\t\t\t\"analyzer\": \"english\",\n\t\t\t\t\"fields\": {\n\t\t\t\t\t\"raw\":{\n\t\t\t\t\t\t\"type\": \"keyword\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
 						},
 						"url": {
 							"raw": "127.0.0.1:9200/movies/",
@@ -628,6 +628,47 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"from\": 2,\n\t\"size\": 2,\n\t\"query\": {\n\t\t\"match\": {\n\t\t\t\"genre\": \"Sci-Fi\"\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/movies/_search?pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"movies",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "qrySort",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sort\": \"title.raw\"\n}"
 						},
 						"url": {
 							"raw": "127.0.0.1:9200/movies/_search?pretty",

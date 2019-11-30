@@ -60,7 +60,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"mappings\": {\n\t\t\"properties\": {\n\t\t\t\"id\": {\n\t\t\t\t\"type\": \"integer\"\n\t\t\t},\n\t\t\t\"year\": {\n\t\t\t\t\"type\": \"date\"\n\t\t\t},\n\t\t\t\"genre\": {\n\t\t\t\t\"type\": \"keyword\"\n\t\t\t},\n\t\t\t\"title\": {\n\t\t\t\t\"type\": \"text\",\n\t\t\t\t\"analyzer\": \"english\",\n\t\t\t\t\"fields\": {\n\t\t\t\t\t\"raw\":{\n\t\t\t\t\t\t\"type\": \"keyword\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
+							"raw": "{\n\t\"mappings\": {\n\t\t\"properties\": {\n\t\t\t\"id\": {\n\t\t\t\t\"type\": \"integer\"\n\t\t\t},\n\t\t\t\"year\": {\n\t\t\t\t\"type\": \"date\",\n\t\t\t\t\"fields\": {\n\t\t\t\t\t\"txt\":{\n\t\t\t\t\t\t\"type\": \"text\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"genre\": {\n\t\t\t\t\"type\": \"keyword\"\n\t\t\t},\n\t\t\t\"title\": {\n\t\t\t\t\"type\": \"text\",\n\t\t\t\t\"analyzer\": \"english\",\n\t\t\t\t\"fields\": {\n\t\t\t\t\t\"raw\":{\n\t\t\t\t\t\t\"type\": \"keyword\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
 						},
 						"url": {
 							"raw": "127.0.0.1:9200/movies/",
@@ -731,6 +731,174 @@
 								}
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "qryFuzzySpecific",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\": {\n\t\t\"fuzzy\": {\n\t\t\t\"title\": {\n\t\t\t\t\"value\": \"intrsteller\", \"fuzziness\": 2\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/movies/_search?pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"movies",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						},
+						"description": "A way to account for typos and misspellings.\r\nThe levenshtein edit distance accounts for:\r\n- substitutions: interstellar -> intersteller\r\n- insertions: interstellar -> instersstellar\r\n- deletion: interstellar -> interstelar"
+					},
+					"response": []
+				},
+				{
+					"name": "qryFuzzyAuto",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\": {\n\t\t\"fuzzy\": {\n\t\t\t\"title\": {\n\t\t\t\t\"value\": \"intersteller\"\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/movies/_search?pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"movies",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						},
+						"description": "### AUTO fuzzines\r\n- 0 for 1-2 character strings\r\n- 1 for 3-5 character strings\r\n- 2 for anything else"
+					},
+					"response": []
+				},
+				{
+					"name": "qryWildcard",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\":{\n\t\t\"wildcard\":{\n\t\t\t\"year.txt\": \"1*\"\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/movies/_search?pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"movies",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						},
+						"description": "year is date and can not be used on partial search. Mapping was remade adding txt field to year as text type field."
+					},
+					"response": []
+				},
+				{
+					"name": "qryPrefix",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"query\":{\r\n\t\t\"prefix\":{\r\n\t\t\t\"year.txt\": \"201\"\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/movies/_search?pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"movies",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						},
+						"description": "year is date and can not be used on partial search. Mapping was remade adding txt field to year as text type field."
 					},
 					"response": []
 				}

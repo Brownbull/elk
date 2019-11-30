@@ -4,6 +4,11 @@ This will describe operations on datasets obtained from queries or filters on El
   - [Pagination](#pagination)
   - [Sorting](#sorting)
     - [Map text sorting trick](#map-text-sorting-trick)
+  - [Fuzzy Matches](#fuzzy-matches)
+    - [AUTO fuzzines](#auto-fuzzines)
+  - [Partial Match](#partial-match)
+    - [Prefix](#prefix)
+    - [Wildcard](#wildcard)
 ***
 ## Pagination
 Allows you to get 'n' results from 'm' page (starting from 0)
@@ -48,4 +53,53 @@ curl -XPUT 127.0.0.1:9200/movies
   }
 }
 
+```
+
+## Fuzzy Matches
+A way to account for typos and misspellings.
+The levenshtein edit distance accounts for:
+- substitutions: interstellar -> intersteller
+- insertions: interstellar -> instersstellar
+- deletion: interstellar -> interstelar
+
+`All of the above have an edit distance of 1`
+
+```shell
+curl -XGET 127.0.0.1:9200/movies/_search?pretty -d
+{
+	"query": {
+		"fuzzy": {
+			"title": {
+				"value": "intrsteller", "fuzziness": 2
+			}
+		}
+	}
+}
+```
+
+### AUTO fuzzines
+- 0 for 1-2 character strings
+- 1 for 3-5 character strings
+- 2 for anything else
+
+## Partial Match
+### Prefix
+```shell
+{
+	"query":{
+		"prefix":{
+			"year": "201"
+		}
+	}
+}
+```
+### Wildcard
+```shell
+{
+	"query":{
+		"wildcard":{
+			"year": "1*"
+		}
+	}
+}
 ```

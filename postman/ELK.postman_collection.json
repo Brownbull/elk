@@ -57,7 +57,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"mappings\": {\n\t\t\"properties\": {\n\t\t\t\"year\": {\n\t\t\t\t\"type\": \"date\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					"raw": "{\n\t\"mappings\": {\n\t\t\"properties\": {\n\t\t\t\"id\": {\n\t\t\t\t\"type\": \"integer\"\n\t\t\t},\n\t\t\t\"year\": {\n\t\t\t\t\"type\": \"date\"\n\t\t\t},\n\t\t\t\"genre\": {\n\t\t\t\t\"type\": \"keyword\"\n\t\t\t},\n\t\t\t\"title\": {\n\t\t\t\t\"type\": \"text\",\n\t\t\t\t\"analyzer\": \"english\"\n\t\t\t}\n\t\t}\n\t}\n}"
 				},
 				"url": {
 					"raw": "127.0.0.1:9200/movies/",
@@ -355,6 +355,329 @@
 						{
 							"key": "retry_on_conflict",
 							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queryMoviesPhrase",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\": {\n\t\t\"match_phrase\": {\n\t\t\t\"genre\": \"Sci\"\n\t\t}\n\t}\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:9200/movies/_search?pretty",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"movies",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queryMoviesWords",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\": {\n\t\t\"match\": {\n\t\t\t\"title\": \"Star Trek\"\n\t\t}\n\t}\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:9200/movies/_search?pretty",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"movies",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queryExactMovies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\": {\n\t\t\"match\": {\n\t\t\t\"genre\": \"Sci-Fi\"\n\t\t}\n\t}\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:9200/movies/_search?pretty",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"movies",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mPutSeries",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mappings\": {\n\t\t\"properties\": {\n\t\t\t\"film_to_franchise\": {\n\t\t\t\t\"type\": \"join\",\n\t\t\t\t\"relations\": {\n\t\t\t\t\t\"franchise\": \"film\"\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:9200/series",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"series"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "putBulkSeries",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/D:/Reference/ELK/data/series/series.json"
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:9200/_bulk?pretty",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"_bulk"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queryParentSeries",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":{\n\t\t\"has_parent\": {\n\t\t\t\"parent_type\": \"franchise\",\n\t\t\t\"query\": {\n\t\t\t\t\"match\": {\n\t\t\t\t\t\"title\": \"Star Wars\"\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:9200/series/_search?pretty",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"series",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queryChildSeries",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":{\n\t\t\"has_child\": {\n\t\t\t\"type\": \"film\",\n\t\t\t\"query\": {\n\t\t\t\t\"match\": {\n\t\t\t\t\t\"title\": \"Awakens\"\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:9200/series/_search?pretty",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"series",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "qryBoolMustFilterMovies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"bool\": {\n\t\t\t\"must\": {\n\t\t\t\t\"term\": {\n\t\t\t\t\t\"title\": \"trek\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"filter\": {\n\t\t\t\t\"range\": {\n\t\t\t\t\t\"year\": {\n\t\t\t\t\t\t\"gte\": 2010\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:9200/movies/_search?pretty",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"movies",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
 						}
 					]
 				}

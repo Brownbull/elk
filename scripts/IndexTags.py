@@ -34,5 +34,5 @@ def readTags():
 es = elasticsearch.Elasticsearch()
 
 es.indices.delete(index="tags",ignore=404)
-deque(helpers.parallel_bulk(es,readRatings(),index="tags"), maxlen=0)
+deque(helpers.parallel_bulk(es,readTags(),index="tags"), maxlen=0)
 es.indices.refresh()

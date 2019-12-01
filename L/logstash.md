@@ -5,7 +5,8 @@
   - [Typical use](#typical-use)
   - [install](#install)
     - [Ubuntu](#ubuntu)
-    - [Configure](#configure)
+  - [Configure](#configure)
+  - [Run](#run)
 ***
 ## What it is?
 Tool to move data
@@ -34,4 +35,38 @@ sudo apt-get update
 sudo apt-get install logstash
 ```
 
-### Configure
+## Configure
+```shell
+sudo nano /etc/logstash/conf.d/logstash.conf
+# file
+input {
+        file {
+                path => "/home/brownbull/ELK/logs/access_log"
+                start_position => "brginning"
+        }
+}
+
+filter {
+        grok {
+                match => {"message" => "%{COMBINEDAPACHELOG}"}
+        }
+        date {
+                match => ["timestamp", "dd/MMM/yyyy:HH:mm:ss Z"]
+        }
+}
+
+output {
+        elasticsearch {
+                hosts => ["localhost:9200"]
+        }
+        stdout {
+                codec => rubydebug
+        }
+}         
+```
+
+## Run
+```shell
+cd /usr/share/logstash
+sudo bin/logstash -f /etc/logstash/conf.d/logstash.conf
+```

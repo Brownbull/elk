@@ -7,6 +7,8 @@
     - [Ubuntu](#ubuntu)
   - [Configure](#configure)
   - [Run](#run)
+    - [Simple](#simple)
+    - [Ubuntu Server](#ubuntu-server)
 ***
 ## What it is?
 Tool to move data
@@ -66,7 +68,22 @@ output {
 ```
 
 ## Run
+### Simple
+```shell
+# windows
+logstash -e "input { stdin { } } output { stdout {} }"
+# ubuntu server
+cd /usr/share/logstash
+sudo bin/logstash -e 'input { stdin { } } output { stdout {} }'
+```
+
+
+
+### Ubuntu Server
 ```shell
 cd /usr/share/logstash
-sudo bin/logstash -f /etc/logstash/conf.d/logstash.conf
+sudo bin/logstash -f /etc/logstash/conf.d/logstash.conf --config.reload.automatic
+# The --config.reload.automatic option enables automatic config 
+# reloading so that you don’t have to stop and restart Logstash every 
+# time you modify the configuration file.
 ```

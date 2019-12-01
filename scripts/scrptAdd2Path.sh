@@ -1,5 +1,6 @@
 #!/bin/bash
-cp $1 /bin
-chmod a+x /bin/$1
-echo "source .profile"
-echo "which $1"
+sudo cp $1 /bin
+sudo chmod a+x /bin/$1
+cd ~
+source .profile
+which $1

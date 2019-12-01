@@ -1130,6 +1130,51 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "histogramYear",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"aggs\":{\n\t\t\"release\":{\n\t\t\t\"histogram\":{\n\t\t\t\t\"field\":\"year\",\n\t\t\t\t\"interval\":10\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/movies/_search?size=0&pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"movies",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "0"
+								},
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -1335,6 +1380,187 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "aggCount",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"aggs\": {\n\t\t\"ratings\":{\n\t\t\t\"terms\": {\n\t\t\t\t\"field\":\"rating\"\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/ratings/_search?size=0&pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"ratings",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "0"
+								},
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						},
+						"description": "Get accumulated counter on each rating from 5.0 all the way to 1.0"
+					},
+					"response": []
+				},
+				{
+					"name": "aggQryCount",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\":{\n\t\t\"match\":{\n\t\t\t\"rating\":5.0\n\t\t}\n\t},\n\t\"aggs\":{\n\t\t\"ratings\":{\n\t\t\t\"terms\":{\n\t\t\t\t\"field\":\"rating\"\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/ratings/_search?size=0&pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"ratings",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "0"
+								},
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aggAvg",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\":{\n\t\t\"match_phrase\":{\n\t\t\t\"title\":\"Star Wars Episode IV\"\n\t\t}\n\t},\n\t\"aggs\":{\n\t\t\"avg_rating\":{\n\t\t\t\"avg\":{\n\t\t\t\t\"field\":\"rating\"\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/ratings/_search?size=0&pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"ratings",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "0"
+								},
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "histogramRating",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"aggs\":{\n\t\t\"whole_ratings\":{\n\t\t\t\"histogram\":{\n\t\t\t\t\"field\":\"rating\",\n\t\t\t\t\"interval\": 1.0\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/ratings/_search?size=0&pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"ratings",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "0"
+								},
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -1441,6 +1667,96 @@
 								"_search"
 							],
 							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "timeseries",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"aggs\":{\n\t\t\"timestamp\":{\n\t\t\t\"date_histogram\":{\n\t\t\t\t\"field\":\"@timestamp\",\n\t\t\t\t\"interval\":\"hour\"\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/logstash-2019.12.01-000001/_search?size=0&pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"logstash-2019.12.01-000001",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "0"
+								},
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "timeseriesQry",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\":{\n\t\t\"match\":{\n\t\t\t\"agent\":\"Googlebot\"\n\t\t}\n\t},\n\t\"aggs\":{\n\t\t\"timestamp\":{\n\t\t\t\"date_histogram\":{\n\t\t\t\t\"field\":\"@timestamp\",\n\t\t\t\t\"interval\":\"hour\"\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/logstash-2019.12.01-000001/_search?size=0&pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"logstash-2019.12.01-000001",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "0"
+								},
 								{
 									"key": "pretty",
 									"value": null

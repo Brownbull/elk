@@ -1,0 +1,17 @@
+db.infra.aggregate(
+[
+  {
+    "$match": {
+      "host": "elkgabe"
+    }
+  }, 
+  {
+    "$group": {
+      "_id": "$server",
+      "total": {
+        "$sum": "$conections"
+      }
+    }
+  }
+]
+)

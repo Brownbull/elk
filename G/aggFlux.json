@@ -1,0 +1,10 @@
+db.infra.aggregate(
+[
+  {
+    "$match": {
+      "host": "elkgabe",
+      "server": "UX01"
+    }
+  }
+]
+)

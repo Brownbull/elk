@@ -1,0 +1,17 @@
+input {
+  file {
+    path => "/home/brownbull/ELK/L/pipeInfra/data/UX10.csv"
+    start_position => "beginning"
+  }
+}
+filter {
+      csv {
+        separator => ","
+      }
+    }
+output {
+  file {
+   path => "/home/brownbull/ELK/L/pipeInfra/text.txt"
+   co
+ }
+}    

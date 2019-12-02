@@ -1768,6 +1768,101 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "infra",
+			"item": [
+				{
+					"name": "qryAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:9200/infra/_search?pretty",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"infra",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mapDef",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:9200/infra/_mapping",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"infra",
+								"_mapping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "drop",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:9200/infra",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"infra"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

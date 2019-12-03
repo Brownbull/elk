@@ -10,6 +10,9 @@
     - [Simple](#simple)
     - [Ubuntu Server](#ubuntu-server)
     - [Plugins](#plugins)
+    - [Log](#log)
+    - [Restart](#restart)
+    - [Config Files](#config-files)
 ***
 ## What it is?
 Tool to move data
@@ -93,4 +96,24 @@ sudo bin/logstash -f /etc/logstash/conf.d/logstash.conf --config.reload.automati
 install plugins
 ```shell
 sudo /usr/share/logstash/bin/logstash-plugin install --vers ion=3.1.6 logstash-output-mongodb
+```
+
+### Log
+```shell
+less /var/log/logstash/logstash-plain.log
+less /var/log/logstash/logstash-slowlog-plain.log
+```
+
+### Restart
+```shell
+systemctl daemon-reload
+systemctl restart logstash
+```
+
+### Config Files
+```shell
+cd /etc/logstash
+cd /etc/logstash/logstash.yml
+# path.logs: 
+cd /var/log/logstash
 ```

@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "" | logstash -e 'input { stdin {} } filter { date { match => [ "message", "ISO8601", "yyyy-MM-dd HH:mm:ss ZZZ"] } }'

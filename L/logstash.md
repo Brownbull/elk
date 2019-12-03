@@ -9,6 +9,7 @@
   - [Run](#run)
     - [Simple](#simple)
     - [Ubuntu Server](#ubuntu-server)
+    - [Plugins](#plugins)
 ***
 ## What it is?
 Tool to move data
@@ -86,4 +87,10 @@ sudo bin/logstash -f /etc/logstash/conf.d/logstash.conf --config.reload.automati
 # The --config.reload.automatic option enables automatic config 
 # reloading so that you don’t have to stop and restart Logstash every 
 # time you modify the configuration file.
+```
+
+### Plugins
+install plugins
+```shell
+sudo /usr/share/logstash/bin/logstash-plugin install --vers ion=3.1.6 logstash-output-mongodb
 ```

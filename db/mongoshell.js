@@ -1,1 +1,2 @@
-show collections
+show collections
+db.infra.count()

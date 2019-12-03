@@ -21,6 +21,6 @@ sudo /bin/systemctl start kibana.service
 
 ## Start
 ```shell
-cd /var/lib/grafana/plugins/mongodb- grafana
+cd /var/lib/grafana/plugins/mongodb-grafana
 npm run server
 ```

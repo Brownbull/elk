@@ -8,3 +8,16 @@ db.infra.aggregate(
   }
 ]
 )
+
+
+db.infra.aggregate( [ 
+{
+  "$addFields": {
+      "convertedDate": { "$toDate": "$timestamp" }
+   }
+},
+{  "$match" :  {  "server" : "UX01", "convertedDate" : { "$gte" : "$from", "$lt" : "$to" }}},
+{  "$bucketAuto" :  { "groupBy" : "$convertedDate",  
+                           "buckets" : "$dateBucketCount", 
+                            "output" :  {  "maxValue" : { "$max" : "$percFreeHDD" }  }   }   },  
+{  "$project" :  {  "name" : "value",  "value" : "$maxValue",  "ts" : "$_id.min",  "_id" : 0  }  }  ]  )

@@ -1,0 +1,14 @@
+{
+    "_id" : ObjectId("5de6ef5c7c7c423e26002c36"),
+    "percFreeRAM" : 68,
+    "percFreeHDD" : 97,
+    "@timestamp" : "\"2019-11-18T03:00:00.000Z\"",
+    "host" : "elkgabe",
+    "percFreeCPU" : 83,
+    "availableSpaceGb" : 692.0,
+    "server" : "UX010",
+    "totalSpaceGb" : 712,
+    "tsdate" : ISODate("2019-11-18T03:00:00.000Z"),
+    "@version" : "1",
+    "conections" : 0
+}

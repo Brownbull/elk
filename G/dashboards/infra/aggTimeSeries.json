@@ -1,0 +1,22 @@
+
+db.infra.aggregate( [ 
+{
+  "$match": 
+  {
+    "tsdate":
+    {
+      "$gte": "$from", 
+      "$lt": "$to" 
+    }
+  }
+},  
+{ 
+  "$project" : 
+  { 
+    "name" : "table", 
+    "value" :"$conections", 
+    "ts" : "$tsdate", 
+    "_id" : 0 
+  } 
+} 
+] )

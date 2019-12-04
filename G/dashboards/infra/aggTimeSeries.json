@@ -1,4 +1,4 @@
-
+// Connections
 db.infra.aggregate( [ 
 {
   "$match": 
@@ -13,8 +13,96 @@ db.infra.aggregate( [
 { 
   "$project" : 
   { 
-    "name" : "table", 
+    "name" : "Connections", 
     "value" :"$conections", 
+    "ts" : "$tsdate", 
+    "_id" : 0 
+  } 
+} 
+] )
+// percFreeRAM
+db.infra.aggregate( [ 
+{
+  "$match": 
+  {
+    "tsdate":
+    {
+      "$gte": "$from", 
+      "$lt": "$to" 
+    }
+  }
+},  
+{ 
+  "$project" : 
+  { 
+    "name" : "percFreeRAM", 
+    "value" :"$percFreeRAM", 
+    "ts" : "$tsdate", 
+    "_id" : 0 
+  } 
+} 
+] )
+// percFreeHDD
+db.infra.aggregate( [ 
+{
+  "$match": 
+  {
+    "tsdate":
+    {
+      "$gte": "$from", 
+      "$lt": "$to" 
+    }
+  }
+},  
+{ 
+  "$project" : 
+  { 
+    "name" : "percFreeHDD", 
+    "value" :"$percFreeHDD", 
+    "ts" : "$tsdate", 
+    "_id" : 0 
+  } 
+} 
+] )
+// percFreeCPU
+db.infra.aggregate( [ 
+{
+  "$match": 
+  {
+    "tsdate":
+    {
+      "$gte": "$from", 
+      "$lt": "$to" 
+    }
+  }
+},  
+{ 
+  "$project" : 
+  { 
+    "name" : "percFreeCPU", 
+    "value" :"$percFreeCPU", 
+    "ts" : "$tsdate", 
+    "_id" : 0 
+  } 
+} 
+] )
+// availableSpaceGb
+db.infra.aggregate( [ 
+{
+  "$match": 
+  {
+    "tsdate":
+    {
+      "$gte": "$from", 
+      "$lt": "$to" 
+    }
+  }
+},  
+{ 
+  "$project" : 
+  { 
+    "name" : "availableSpaceGb", 
+    "value" :"$availableSpaceGb", 
     "ts" : "$tsdate", 
     "_id" : 0 
   } 

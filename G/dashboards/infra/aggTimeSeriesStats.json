@@ -1,0 +1,83 @@
+// max percFreeRAM
+db.infra.aggregate( [ 
+{ "$match": { "tsdate": { "$gte": "$from", "$lt": "$to" } } },  
+{ "$sort" : {"tsdate" : 1} },     
+{ "$bucketAuto" : { 
+    "groupBy" : "$tsdate",  
+    "buckets" : "$dateBucketCount", 
+    "output" : { "maxValue" : { "$max" : "$percFreeRAM" } } } }, 
+{ "$project" : { "name" : "max percFreeRAM", "value" :"$maxValue", "ts" : "$_id.min", "_id" : 0 } } ] )
+// min percFreeRAM
+db.infra.aggregate( [ 
+{ "$match": { "tsdate": { "$gte": "$from", "$lt": "$to" } } },  
+{ "$sort" : {"tsdate" : 1} },     
+{ "$bucketAuto" : { 
+    "groupBy" : "$tsdate",  
+    "buckets" : "$dateBucketCount", 
+    "output" : { "minValue" : { "$min" : "$percFreeRAM" } } } }, 
+{ "$project" : { "name" : "min percFreeRAM", "value" :"$minValue", "ts" : "$_id.min", "_id" : 0 } } ] )
+// avg percFreeRAM
+db.infra.aggregate( [ 
+{ "$match": { "tsdate": { "$gte": "$from", "$lt": "$to" } } },  
+{ "$sort" : {"tsdate" : 1} },     
+{ "$bucketAuto" : { 
+    "groupBy" : "$tsdate",  
+    "buckets" : "$dateBucketCount", 
+    "output" : { "avgValue" : { "$avg" : "$percFreeRAM" } } } }, 
+{ "$project" : { "name" : "avg percFreeRAM", "value" :"$avgValue", "ts" : "$_id.min", "_id" : 0 } } ] )
+
+// max percFreeHDD
+db.infra.aggregate( [ 
+{ "$match": { "tsdate": { "$gte": "$from", "$lt": "$to" } } },  
+{ "$sort" : {"tsdate" : 1} },     
+{ "$bucketAuto" : { 
+    "groupBy" : "$tsdate",  
+    "buckets" : "$dateBucketCount", 
+    "output" : { "maxValue" : { "$max" : "$percFreeHDD" } } } }, 
+{ "$project" : { "name" : "max percFreeHDD", "value" :"$maxValue", "ts" : "$_id.min", "_id" : 0 } } ] )
+// min percFreeHDD
+db.infra.aggregate( [ 
+{ "$match": { "tsdate": { "$gte": "$from", "$lt": "$to" } } },  
+{ "$sort" : {"tsdate" : 1} },     
+{ "$bucketAuto" : { 
+    "groupBy" : "$tsdate",  
+    "buckets" : "$dateBucketCount", 
+    "output" : { "minValue" : { "$min" : "$percFreeHDD" } } } }, 
+{ "$project" : { "name" : "min percFreeHDD", "value" :"$minValue", "ts" : "$_id.min", "_id" : 0 } } ] )
+// avg percFreeHDD
+db.infra.aggregate( [ 
+{ "$match": { "tsdate": { "$gte": "$from", "$lt": "$to" } } },  
+{ "$sort" : {"tsdate" : 1} },     
+{ "$bucketAuto" : { 
+    "groupBy" : "$tsdate",  
+    "buckets" : "$dateBucketCount", 
+    "output" : { "avgValue" : { "$avg" : "$percFreeHDD" } } } }, 
+{ "$project" : { "name" : "avg percFreeHDD", "value" :"$avgValue", "ts" : "$_id.min", "_id" : 0 } } ] )
+
+// max percFreeCPU
+db.infra.aggregate( [ 
+{ "$match": { "tsdate": { "$gte": "$from", "$lt": "$to" } } },  
+{ "$sort" : {"tsdate" : 1} },     
+{ "$bucketAuto" : { 
+    "groupBy" : "$tsdate",  
+    "buckets" : "$dateBucketCount", 
+    "output" : { "maxValue" : { "$max" : "$percFreeCPU" } } } }, 
+{ "$project" : { "name" : "max percFreeCPU", "value" :"$maxValue", "ts" : "$_id.min", "_id" : 0 } } ] )
+// min percFreeCPU
+db.infra.aggregate( [ 
+{ "$match": { "tsdate": { "$gte": "$from", "$lt": "$to" } } },  
+{ "$sort" : {"tsdate" : 1} },     
+{ "$bucketAuto" : { 
+    "groupBy" : "$tsdate",  
+    "buckets" : "$dateBucketCount", 
+    "output" : { "minValue" : { "$min" : "$percFreeCPU" } } } }, 
+{ "$project" : { "name" : "min percFreeCPU", "value" :"$minValue", "ts" : "$_id.min", "_id" : 0 } } ] )
+// avg percFreeCPU
+db.infra.aggregate( [ 
+{ "$match": { "tsdate": { "$gte": "$from", "$lt": "$to" } } },  
+{ "$sort" : {"tsdate" : 1} },     
+{ "$bucketAuto" : { 
+    "groupBy" : "$tsdate",  
+    "buckets" : "$dateBucketCount", 
+    "output" : { "avgValue" : { "$avg" : "$percFreeCPU" } } } }, 
+{ "$project" : { "name" : "avg percFreeCPU", "value" :"$avgValue", "ts" : "$_id.min", "_id" : 0 } } ] )

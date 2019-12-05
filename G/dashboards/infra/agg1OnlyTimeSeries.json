@@ -1,0 +1,9 @@
+// max percFreeRAM
+db.infra.aggregate( [ 
+{ "$match": { "tsdate": { "$gte": "$from", "$lt": "$to" } } },  
+{ "$sort" : {"tsdate" : 1} },     
+{ "$bucketAuto" : { 
+    "groupBy" : "$tsdate",  
+    "buckets" : "$dateBucketCount", 
+    "output" : { "maxValue" : { "$max" : "$percFreeRAM" } } } }, 
+{ "$project" : { "name" : "max percFreeRAM", "value" :"$maxValue", "ts" : "$_id.min", "_id" : 0 } } ] )

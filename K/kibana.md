@@ -21,6 +21,9 @@ sudo /bin/systemctl start kibana.service
 
 ## Start
 ```shell
+# make sure elastic is running ok
+service elasticsearch status
+# now you can proceed
 cd /var/lib/grafana/plugins/mongodb-grafana
 npm run server
 ```
